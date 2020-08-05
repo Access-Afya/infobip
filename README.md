@@ -11,7 +11,7 @@ If any of the following are applicable to your project, then the directory struc
 Via Composer
 
 ``` bash
-$ composer require access-afya/infobip
+$ composer require accessafya/infobip
 ```
 
 ## Usage
