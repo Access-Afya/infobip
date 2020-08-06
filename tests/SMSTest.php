@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 class SMSTest extends \PHPUnit\Framework\TestCase
 {
-  private static $baseUrl;
-
-  private static $username;
-  
-  private static $password;
-  
-  private static $senderId;
+  private static $infobip;
 
   public static function setUpBeforeClass(): void
   {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
 
-    self::$baseUrl = $_ENV['BASE_URL'];
-    self::$username = $_ENV['USERNAME'];
-    self::$password = $_ENV['PASSWORD'];
-    self::$senderId = $_ENV['SENDER_ID'];
+    self::$infobip = new AccessAfya\Infobip(
+      $_ENV['USERNAME'],
+      $_ENV['PASSWORD'],
+      $_ENV['SENDER_ID'],
+      $_ENV['BASE_URL']
+    );
   }
 
   /**
@@ -28,14 +24,7 @@ class SMSTest extends \PHPUnit\Framework\TestCase
    */
   public function testStatusCodeIsSuccess()
   {
-    $sms = new AccessAfya\Infobip\SMS(
-      self::$username,
-      self::$password,
-      self::$senderId,
-      self::$baseUrl
-    );
-
-    $response = $sms->send(
+    $response = self::$infobip->sms->send(
       "Hello, Library test!",
       "254719747908"
     );
@@ -44,14 +33,13 @@ class SMSTest extends \PHPUnit\Framework\TestCase
     $this->assertEquals(200, $statusCode);
   }
 
-  public function testStatusCodeIsFail()
-  {
-    # code...
-  }
-
   public function testResponseIsSuccess()
   {
-    # code...
-    // $body = $response = json_decode($response->getBody()->getContents(), true);
+    $response = self::$infobip->sms->send(
+      "Hello, Library test!",
+      "25471974708"
+    );
+    $body = $response = json_decode($response->getBody()->getContents(), true);
+    $this->assertArrayHasKey('messages', $body);
   }
 }

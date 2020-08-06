@@ -5,35 +5,33 @@ declare(strict_types=1);
 namespace AccessAfya\Infobip;
 
 use GuzzleHttp\Client;
-use Exception;
 
 class SMS
 {
+  /** 
+   * Infobip sender id
+   * 
+   * @var string
+  */
   private $senderId;
 
+  /** 
+   * HTTP client
+   * 
+   * @var Client
+  */
   private $client;
 
   /** 
-   * Initialize with Authentication
+   * Initialize with http client
    * 
-   * @param string $username
-   * @param string $password
+   * @param Client $client
    * @param string $senderId
-   * @param string $baseUrl
    */
-  public function __construct($username, $password, $senderId, $baseUrl)
+  public function __construct($client, $senderId)
   {
-    $authorization = base64_encode($username.":".$password);
-
+    $this->client = $client;
     $this->senderId = $senderId;
-    $this->client = new Client([
-      'headers' => [
-        "Authorization" => "Basic ".$authorization,
-        "Accept" => "application/json",
-        "Content-Type" => "application/json"
-      ],
-      'base_uri' => $baseUrl,
-    ]);
   }
 
   /**
