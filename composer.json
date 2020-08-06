@@ -1,9 +1,9 @@
 {
-    "version": "0.0.1",
+    "version": "0.1.0",
     "name": "accessafya/infobip",
     "type": "library",
-    "description": "Infobip SMS",
-    "keywords": ["Infobip", "SMS"],
+    "description": "Infobip API",
+    "keywords": ["Infobip", "api", "sms", "email", "voice", "src", "whatsapp"],
     "license": "MIT",
     "require": {
         "php": "~7.2",
