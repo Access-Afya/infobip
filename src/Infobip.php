@@ -8,6 +8,7 @@ use AccessAfya\Infobip\RCS;
 use AccessAfya\Infobip\SMS;
 use AccessAfya\Infobip\Voice;
 use AccessAfya\Infobip\WhatsApp;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Infobip APIs wrapper
@@ -74,14 +75,13 @@ class Infobip {
   */
   private $password;
 
-  public function __construct($username, $password, $senderId, $baseUrl)
+  public function __construct(string $username, string $password, string $senderId, string $baseUrl)
   {
     $this->username = $username;
     $this->password = $password;
     $this->senderId = $senderId;
     $this->baseUrl = $baseUrl;
 
-    // Authenticate
     $client = $this->authenticate();
 
     // Initialize Wrappers
@@ -100,7 +100,7 @@ class Infobip {
    * 
    * @return void
    */
-  public function authenticate()
+  public function authenticate(): ClientInterface
   {
     $authorization = base64_encode($this->username.":".$this->password);
 

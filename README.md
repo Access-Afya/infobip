@@ -17,22 +17,34 @@ $ composer require accessafya/infobip
 ## Usage
 
 ``` php
-
-// SMS
-$sms = new AccessAfya\Infobip\SMS(
+// Initial with authentication
+$infobip = new AccessAfya\Infobip(
   $username,
   $password,
   $senderId,
   $baseUrl
 );
 
-// Returns GuzzleHttp Response object
-$response = $sms->send(
+```
+
+### SMS
+
+Sending  SMS
+```php
+$response = $infobip->sms->send(
   "text_message",
   "phone_number"
   "scheduled_time" // Optional
 );
+```
 
+### Email
+
+Sending  Email
+
+```php
+// Coming soon
+$response = $infobip->email->send();
 ```
 
 ## Testing

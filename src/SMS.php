@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace AccessAfya\Infobip;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Response;
 
-class SMS
+class SMS implements InterfaceInfobip
 {
   /** 
    * Infobip sender id
@@ -25,10 +27,10 @@ class SMS
   /** 
    * Initialize with http client
    * 
-   * @param Client $client
+   * @param ClientInterface $client
    * @param string $senderId
    */
-  public function __construct($client, $senderId)
+  public function __construct(ClientInterface $client, string $senderId)
   {
     $this->client = $client;
     $this->senderId = $senderId;
@@ -41,9 +43,9 @@ class SMS
    * @param string $to
    * @param string $time
    * 
-   * @return ResponseInterface | boolean
+   * @return Response
    */
-  public function send(String $message, String $to, $time = null)
+  public function send(string $message, string $to, string $time = null): Response
   {
     $payload = [
       "messages" => [
