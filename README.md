@@ -1,10 +1,9 @@
 # Infobip
 
-An infobip API wrapper.
-<br />
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Latest Version on Packagist][ico-version]][link-packagist]
 
+An infobip API wrapper.
 
 ## Install
 
